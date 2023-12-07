@@ -33,7 +33,7 @@ This will build the GraalVM native image inside a docker container and generate 
 
 ### Generate the deployable artifact
 
-```
+```bash
 ./gradlew :app:buildNativeLambda
 ./gradlew test
 ```

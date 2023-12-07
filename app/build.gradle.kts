@@ -9,7 +9,8 @@ plugins {
 version = "0.1"
 group = "org.essexstreet"
 
-val kotlinVersion=project.properties.get("kotlinVersion")
+val kotlinVersion = project.properties.get("kotlinVersion")
+
 repositories {
     mavenCentral()
 }
@@ -30,14 +31,13 @@ dependencies {
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 }
 
-
 application {
     mainClass.set("org.essexstreet.FunctionLambdaRuntime")
 }
+
 java {
     sourceCompatibility = JavaVersion.toVersion("17")
 }
-
 
 micronaut {
     runtime("lambda_provided")
@@ -51,14 +51,13 @@ micronaut {
     }
 }
 
-
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
     baseImage.set("amazonlinux:2")
     jdkVersion.set("17")
     args(
-        "-XX:MaximumHeapSizePercent=80",
-        "-Dio.netty.allocator.numDirectArenas=0",
-        "-Dio.netty.noPreferDirect=true"
+            "-XX:MaximumHeapSizePercent=80",
+            "-Dio.netty.allocator.numDirectArenas=0",
+            "-Dio.netty.noPreferDirect=true"
     )
 }
 
