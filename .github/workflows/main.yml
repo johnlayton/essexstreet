@@ -1,10 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
-
 name: Main
 
 on:
@@ -30,35 +23,42 @@ jobs:
     - name: Git clone the repository
       uses: actions/checkout@v4
 
-    - name: Configure aws credentials
+    - name: Configure AWS credentials
+      if: ${{ !env.ACT }}
       uses: aws-actions/configure-aws-credentials@v1.7.0
       with:
         role-to-assume: arn:aws:iam::236281372978:role/GitHubAction-AssumeRoleWithAction
         role-session-name: GitHub_to_AWS_via_FederatedOIDC
         aws-region: ${{ env.AWS_REGION }}
 
-    - name: Sts GetCallerIdentity
-      run: |
-        aws sts get-caller-identity
-
-    - name: Copy files to the test website with the AWS CLI
-      run: |
-        aws lambda list-functions
-
-    - name: Configure aws credentials
+    - name: Configure AWS credentials
+      if: ${{ env.ACT }}
       uses: aws-actions/configure-aws-credentials@v1.7.0
       with:
-        role-to-assume: arn:aws:iam::680536935516:role/GitHubAction-AssumeRoleWithAction
-        role-session-name: GitHub_to_AWS_via_FederatedOIDC
         aws-region: ${{ env.AWS_REGION }}
 
-    - name: Sts GetCallerIdentity
+    - name: Sts - GetCallerIdentity
       run: |
-        aws sts get-caller-identity
+        aws --no-cli-pager sts get-caller-identity
 
-    - name: Copy files to the test website with the AWS CLI
+    - name: Lambda - List Functions
       run: |
-        aws lambda list-functions
+        aws --no-cli-pager lambda list-functions
+
+#    - name: Configure aws credentials
+#      uses: aws-actions/configure-aws-credentials@v1.7.0
+#      with:
+#        role-to-assume: arn:aws:iam::680536935516:role/GitHubAction-AssumeRoleWithAction
+#        role-session-name: GitHub_to_AWS_via_FederatedOIDC
+#        aws-region: ${{ env.AWS_REGION }}
+#
+#    - name: Sts GetCallerIdentity
+#      run: |
+#        aws sts get-caller-identity
+#
+#    - name: Copy files to the test website with the AWS CLI
+#      run: |
+#        aws lambda list-functions
 #  native:
 #
 #    runs-on: ubuntu-latest
@@ -80,36 +80,37 @@ jobs:
 #        native-image --version
 
 
-#  gradle:
-#
-##    strategy:
-##      matrix:
-##        os: [ubuntu-latest, macos-latest, windows-latest]
-##    runs-on: ${{ matrix.os }}
-#
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#    - uses: actions/checkout@v4
-#
-#    - uses: actions/setup-java@v3
-#      with:
-#        distribution: temurin
-#        java-version: 17
-#
-#    - name: Setup Gradle
-#      uses: gradle/gradle-build-action@v2
-#
-#    - name: Execute Gradle build
-#      run: ./gradlew :app:buildNativeLambda
-#
-#    - name: Execute Gradle build
-#      run: ./gradlew :app:test
-#
-#    - name: Set up Node
-#      uses: actions/setup-node@v3
-#      with:
-#        node-version: "21"
+  gradle:
+    needs: aws
+
+#    strategy:
+#      matrix:
+#        os: [ubuntu-latest, macos-latest, windows-latest]
+#    runs-on: ${{ matrix.os }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-java@v3
+      with:
+        distribution: temurin
+        java-version: 17
+
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+
+    - name: Execute Gradle - buildNativeLambda
+      run: ./gradlew :app:buildNativeLambda
+
+    - name: Execute Gradle - test
+      run: ./gradlew :app:test
+
+    - name: Set up Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: "21"
 
 #    - name: Set up JDK 17
 #      uses: actions/setup-java@v3
