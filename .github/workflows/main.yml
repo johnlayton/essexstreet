@@ -44,6 +44,21 @@ jobs:
     - name: Copy files to the test website with the AWS CLI
       run: |
         aws lambda list-functions
+
+    - name: Configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v1.7.0
+      with:
+        role-to-assume: arn:aws:iam::680536935516:role/GitHubAction-AssumeRoleWithAction
+        role-session-name: GitHub_to_AWS_via_FederatedOIDC
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Sts GetCallerIdentity
+      run: |
+        aws sts get-caller-identity
+
+    - name: Copy files to the test website with the AWS CLI
+      run: |
+        aws lambda list-functions
 #  native:
 #
 #    runs-on: ubuntu-latest
