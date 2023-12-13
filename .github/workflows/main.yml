@@ -131,7 +131,8 @@ jobs:
         run: |
           npm install -g aws-cdk
 
-      - name: Install CDK
+      - name: Check CDK
         run: |
+          cdk --version
           cd infra
           cdk diff
