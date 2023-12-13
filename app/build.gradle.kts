@@ -1,3 +1,5 @@
+import io.micronaut.gradle.docker.NativeImageDockerfile
+
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.21"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.9.21"
@@ -51,7 +53,7 @@ micronaut {
     }
 }
 
-tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
+tasks.named<NativeImageDockerfile>("dockerfileNative") {
     baseImage.set("amazonlinux:2")
     jdkVersion.set("17")
     args(
