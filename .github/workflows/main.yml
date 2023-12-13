@@ -14,8 +14,6 @@ env:
   AWS_REGION: ap-southeast-2
   AWS_ACCOUNT: ${{ vars.AWS_ACCOUNT }}
 
-#    AWS_PROFILE:
-
 jobs:
 
   aws:
