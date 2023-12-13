@@ -129,7 +129,7 @@ jobs:
 
       - name: Install CDK
         run: |
-          node install -g aws-cdk
+          npm install -g aws-cdk
 
       - name: Install CDK
         run: |
