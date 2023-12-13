@@ -8,6 +8,7 @@ on:
 
 permissions:
   id-token: write
+  packages: write
   contents: read
 
 env:
@@ -112,13 +113,22 @@ jobs:
           java-version: 17
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v2.6.0
 
       - name: Execute Gradle - BuildNativeLambda
         run: ./gradlew --console=plain :app:buildNativeLambda
 
       - name: Execute Gradle - Test
         run: ./gradlew --console=plain :app:test
+
+      - name: Publish to GitHub Packages
+        if: ${{ !env.ACT }}
+        uses: gradle/gradle-build-action@v2.6.0
+        with:
+          arguments: --console=plain publish
+        env:
+          USERNAME: ${{ github.actor }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Node
         uses: actions/setup-node@v3
