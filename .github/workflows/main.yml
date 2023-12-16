@@ -141,6 +141,8 @@ jobs:
 
       - name: Check CDK
         run: |
+          cd infra 
           cdk --version
-          cd infra
           cdk diff
+          cdk synth
+          cdk deploy
