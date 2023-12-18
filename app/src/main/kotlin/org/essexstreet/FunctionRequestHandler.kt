@@ -15,7 +15,7 @@ class FunctionRequestHandler : MicronautRequestHandler<APIGatewayProxyRequestEve
     override fun execute(input: APIGatewayProxyRequestEvent): APIGatewayProxyResponseEvent {
         val response = APIGatewayProxyResponseEvent()
         try {
-            val json = String(objectMapper.writeValueAsBytes(mapOf("message" to "Hello World")))
+            val json = String(objectMapper.writeValueAsBytes(mapOf("message" to "Hello Melbourne")))
             response.statusCode = 200
             response.body = json
         } catch (e: IOException) {
