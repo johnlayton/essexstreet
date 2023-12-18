@@ -13,7 +13,7 @@ class FunctionRequestHandlerTest {
         request.path = "/"
         val response = handler.execute(request)
         assertEquals(200, response.statusCode.toInt())
-        assertEquals("{\"message\":\"Hello World\"}", response.body)
+        assertEquals("{\"message\":\"Hello Melbourne\"}", response.body)
         handler.close()
     }
 }
