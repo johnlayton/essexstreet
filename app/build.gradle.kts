@@ -1,12 +1,15 @@
 import io.micronaut.gradle.docker.NativeImageDockerfile
+import org.jetbrains.kotlin.cli.jvm.main
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.21"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.9.21"
     id("com.google.devtools.ksp") version "1.9.21-1.0.15"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.micronaut.application") version "4.2.0"
+    id("io.micronaut.application") version "4.2.1"
+//    id("org.graalvm.buildtools.native") version "0.9.12"
     id("maven-publish")
+//    id("application")
 }
 
 version = "0.1"
@@ -82,3 +85,18 @@ publishing {
     }
 }
 
+graalvmNative {
+    toolchainDetection.set(false)
+//    binaries {
+//        main {
+//
+//            imageName.set('mn-graalvm-application')
+//        }
+//    }
+//    binaries {
+//        main {
+//            imageName.set('mn-graalvm-application')
+////            buildArgs.add('--verbose')
+//        }
+//    }
+}
