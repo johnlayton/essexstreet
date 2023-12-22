@@ -17,6 +17,25 @@ env:
 
 jobs:
 
+  devbox:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install devbox
+        uses: jetpack-io/devbox-install-action@v0.6.0
+
+      - name: Run arbitrary commands
+        run: devbox run -- echo "done!"
+
+      - name: Run arbitrary commands
+        run: devbox run -- java -version
+
+#      - name: Run a script called test
+#        run: devbox run test
+
   aws:
 
     runs-on: ubuntu-latest
