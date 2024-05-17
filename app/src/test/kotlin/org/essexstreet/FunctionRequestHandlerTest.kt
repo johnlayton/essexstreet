@@ -9,8 +9,9 @@ class FunctionRequestHandlerTest {
     fun testHandler() {
         val handler = FunctionRequestHandler()
         val request = APIGatewayProxyRequestEvent()
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
         request.path = "/"
+        request.body = "{\"message\":\"Hello Melbourne\"}"
         val response = handler.execute(request)
         assertEquals(200, response.statusCode.toInt())
         assertEquals("{\"message\":\"Hello Melbourne\"}", response.body)
