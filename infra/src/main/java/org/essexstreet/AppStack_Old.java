@@ -1,4 +1,4 @@
-package com.example;
+package org.essexstreet;
 
 import io.micronaut.aws.cdk.function.MicronautFunction;
 import io.micronaut.aws.cdk.function.MicronautFunctionFile;
@@ -8,9 +8,10 @@ import software.amazon.awscdk.CfnOutput;
 import software.amazon.awscdk.Duration;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
-import software.amazon.awscdk.services.lambda.Runtime;
 import software.amazon.awscdk.services.lambda.Architecture;
-import software.amazon.awscdk.services.apigateway.LambdaRestApi;
+import software.amazon.awscdk.services.lambda.FunctionUrl;
+import software.amazon.awscdk.services.lambda.FunctionUrlAuthType;
+import software.amazon.awscdk.services.lambda.FunctionUrlOptions;
 import software.amazon.awscdk.services.lambda.Code;
 import software.amazon.awscdk.services.lambda.Function;
 import software.amazon.awscdk.services.lambda.Tracing;
@@ -19,22 +20,21 @@ import software.constructs.Construct;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AppStack extends Stack {
+public class AppStack_Old extends Stack {
 
-    public AppStack(final Construct parent, final String id) {
+    public AppStack_Old(final Construct parent, final String id) {
         this(parent, id, null);
     }
 
-    public AppStack(final Construct parent, final String id, final StackProps props) {
+    public AppStack_Old(final Construct parent, final String id, final StackProps props) {
         super(parent, id, props);
 
         Map<String, String> environmentVariables = new HashMap<>();
-        Function function = MicronautFunction.create(ApplicationType.DEFAULT,
+        Function function = MicronautFunction.create(ApplicationType.FUNCTION,
                 true,
                 this,
                 "micronaut-function")
-                .runtime(Runtime.PROVIDED_AL2023)
-                .handler("io.micronaut.function.aws.proxy.payload1.ApiGatewayProxyRequestEventFunction")
+                .handler("org.essexstreet.FunctionRequestHandler")
                 .environment(environmentVariables)
                 .code(Code.fromAsset(functionPath()))
                 .timeout(Duration.seconds(10))
@@ -43,17 +43,17 @@ public class AppStack extends Stack {
                 .tracing(Tracing.ACTIVE)
                 .architecture(Architecture.X86_64)
                 .build();
-        LambdaRestApi api = LambdaRestApi.Builder.create(this, "micronaut-function-api")
-                .handler(function)
-                .build();
+        FunctionUrl functionUrl = function.addFunctionUrl(FunctionUrlOptions.builder()
+                .authType(FunctionUrlAuthType.NONE)
+                .build());
         CfnOutput.Builder.create(this, "MnTestApiUrl")
                 .exportName("MnTestApiUrl")
-                .value(api.getUrl())
+                .value(functionUrl.getUrl())
                 .build();
     }
 
     public static String functionPath() {
-        return "../app_1/build/libs/" + functionFilename();
+        return "../app_2/build/libs/" + functionFilename();
     }
 
     public static String functionFilename() {

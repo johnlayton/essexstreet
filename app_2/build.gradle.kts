@@ -57,16 +57,6 @@ micronaut {
     }
 }
 
-tasks.named<NativeImageDockerfile>("dockerfileNative") {
-    baseImage.set("amazonlinux:2")
-    jdkVersion.set("17")
-    args(
-            "-XX:MaximumHeapSizePercent=80",
-            "-Dio.netty.allocator.numDirectArenas=0",
-            "-Dio.netty.noPreferDirect=true"
-    )
-}
-
 publishing {
     repositories {
         maven {
@@ -100,3 +90,14 @@ graalvmNative {
 //        }
 //    }
 }
+
+tasks.named<NativeImageDockerfile>("dockerfileNative") {
+    baseImage.set("amazonlinux:2")
+    jdkVersion.set("17")
+    args(
+        "-XX:MaximumHeapSizePercent=80",
+        "-Dio.netty.allocator.numDirectArenas=0",
+        "-Dio.netty.noPreferDirect=true"
+    )
+}
+

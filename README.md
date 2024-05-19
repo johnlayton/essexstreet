@@ -112,3 +112,6 @@ cd ..
 - [https://kotlinlang.org/docs/ksp-overview.html](https://kotlinlang.org/docs/ksp-overview.html)
 
 
+## Directories
+
+![Alt](./ls.gif)

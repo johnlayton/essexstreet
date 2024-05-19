@@ -10,8 +10,8 @@ class AppStackTest {
 
     @Test
     void testAppStack() {
-        if (new File(AppStack.functionPath()).exists()) {
-            AppStack stack = new AppStack(new App(), "TestMicronautAppStack");
+        if (new File(AppStack_Old.functionPath()).exists()) {
+            AppStack_Old stack = new AppStack_Old(new App(), "TestMicronautAppStack");
             Template template = Template.fromStack(stack);
             template.hasResourceProperties("AWS::Lambda::Function", Collections.singletonMap("Handler", "org.essexstreet.FunctionRequestHandler"));
         }
