@@ -37,7 +37,7 @@ dependencies {
 //    implementation("io.micronaut.validation:micronaut-validation")
 //    implementation("io.micronaut.serde:micronaut-serde-jackson")
 //    api("ch.qos.logback:logback-classic")
-    implementation("net.logstash.logback:logstash-logback-encoder:6.6")
+    api("net.logstash.logback:logstash-logback-encoder:6.6")
 }
 
 //application {

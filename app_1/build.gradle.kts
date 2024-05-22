@@ -12,34 +12,15 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":lib"))
-    annotationProcessor("io.micronaut:micronaut-http-validation")
-    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
+    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
     annotationProcessor("io.micronaut:micronaut-http-validation")
     implementation("io.micronaut:micronaut-http-client-jdk")
     implementation("io.micronaut.aws:micronaut-aws-apigateway")
     implementation("io.micronaut.aws:micronaut-aws-lambda-events-serde")
-//    implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut.validation:micronaut-validation")
     implementation("io.micronaut:micronaut-jackson-databind")
+    implementation(project(":lib"))
     runtimeOnly("ch.qos.logback:logback-classic")
-
-
-    //    ksp("io.micronaut.serde:micronaut-serde-processor")
-//    implementation("io.micronaut.serde:micronaut-serde")
-//    implementation("io.micronaut.serde:micronaut-serde-jackson")
-//    implementation("io.micronaut.serde:micronaut-serde-jackson")
-
-//    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
-//    annotationProcessor("io.micronaut:micronaut-http-validation")
-//    implementation("io.micronaut:micronaut-http-client-jdk")
-//    implementation("io.micronaut.aws:micronaut-aws-apigateway")
-//    implementation("io.micronaut.aws:micronaut-aws-lambda-events-serde")
-//    implementation("io.micronaut.validation:micronaut-validation")
-//    implementation("io.micronaut:micronaut-jackson-databind")
-//    implementation(project(":lib"))
-//
-//    runtimeOnly("ch.qos.logback:logback-classic")
 }
 
 
