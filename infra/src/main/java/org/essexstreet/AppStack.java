@@ -60,7 +60,7 @@ public class AppStack extends Stack {
         return MicronautFunctionFile.builder()
             .graalVMNative(true)
             .version("0.1")
-            .archiveBaseName("app")
+            .archiveBaseName("app_1")
             .buildTool(BuildTool.GRADLE)
             .build();
     }
