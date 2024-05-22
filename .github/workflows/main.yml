@@ -165,4 +165,4 @@ jobs:
           cdk --version
           cdk diff
           cdk synth
-          cdk deploy
+          cdk deploy --require-approval never

@@ -53,7 +53,7 @@ public class AppStack_Old extends Stack {
     }
 
     public static String functionPath() {
-        return "../app_2/build/libs/" + functionFilename();
+        return "../app/build/libs/" + functionFilename();
     }
 
     public static String functionFilename() {
