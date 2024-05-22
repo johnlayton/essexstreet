@@ -17,6 +17,7 @@
                         </jsonGeneratorDecorator>
             -->
             <jsonFactoryDecorator class="org.essexstreet.TinyTypeTypeAwareFactoryDecorator"/>
+
             <!--
                         <jsonGeneratorDecorator class="net.logstash.logback.mask.MaskingJsonGeneratorDecorator">
                             <path>*/track2</path>

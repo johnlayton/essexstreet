@@ -20,7 +20,8 @@ dependencies {
     implementation("io.micronaut.validation:micronaut-validation")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation(project(":lib"))
-    runtimeOnly("ch.qos.logback:logback-classic")
+    implementation("ch.qos.logback:logback-classic")
+    implementation("net.logstash.logback:logstash-logback-encoder:6.6")
 }
 
 
