@@ -21,7 +21,6 @@ public class Application {
 
     @Singleton
     static class ObjectMapperBeanEventListener implements BeanCreatedEventListener<ObjectMapper> {
-
         @Override
         public ObjectMapper onCreated(BeanCreatedEvent<ObjectMapper> event) {
             final ObjectMapper mapper = event.getBean();

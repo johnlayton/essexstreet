@@ -15,8 +15,9 @@ public class TinyTypeValueModule extends SimpleModule {
 
     public TinyTypeValueModule() {
         text(StringType.class, StringType::new);
-        text(SecretType.class, SecretType::new);
+        text(MaskedStringType.class, MaskedStringType::new);
         integer(IntegerType.class, IntegerType::new);
+        integer(MaskedIntegerType.class, MaskedIntegerType::new);
     }
 
     public <T extends TinyType<String>> TinyTypeValueModule text(Class<T> clazz, Function<String, T> fn) {

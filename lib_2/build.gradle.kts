@@ -16,6 +16,7 @@ plugins {
 //    id("org.graalvm.buildtools.native") version "0.9.12"
     id("java-library")
     id("maven-publish")
+//    id("maven-publish")
 //    id("application")
 }
 

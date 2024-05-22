@@ -1,10 +1,5 @@
 package org.essexstreet;
 
-//public class TinyType {
-//}
-//
-//package com.littlepay.types.core;
-
 import java.util.Objects;
 import java.util.function.Function;
 

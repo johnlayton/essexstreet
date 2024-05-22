@@ -18,6 +18,9 @@ pluginManagement {
 
 //include("cli")
 include("lib")
+//include("lib_2")
 include("app_1")
+//include("app_2")
+//include("app_3")
 //include("app_2")
 include("infra")

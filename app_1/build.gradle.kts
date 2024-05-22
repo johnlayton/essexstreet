@@ -1,21 +1,7 @@
-//plugins {
-//    id("com.github.johnrengelman.shadow") version "8.1.1"
-//    id("io.micronaut.application") version "4.3.8"
-//    id("io.micronaut.aot") version "4.3.8"
-//}
-
-import io.micronaut.gradle.docker.NativeImageDockerfile
-
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.9.21"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.21"
-    id("com.google.devtools.ksp") version "1.9.21-1.0.15"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.micronaut.application") version "4.2.1"
+    id("io.micronaut.application") version "4.3.8"
     id("io.micronaut.aot") version "4.3.8"
-//    id("org.graalvm.buildtools.native") version "0.9.12"
-    id("maven-publish")
-//    id("application")
 }
 
 version = "0.1"
@@ -26,33 +12,47 @@ repositories {
 }
 
 dependencies {
-    ksp("io.micronaut.validation:micronaut-validation-processor")
-    ksp("io.micronaut:micronaut-http-validation")
-//    ksp("io.micronaut.serde:micronaut-serde-processor")
+    implementation(project(":lib"))
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
+    annotationProcessor("io.micronaut:micronaut-http-validation")
     implementation("io.micronaut:micronaut-http-client-jdk")
-//    implementation("io.micronaut.serde:micronaut-serde")
     implementation("io.micronaut.aws:micronaut-aws-apigateway")
     implementation("io.micronaut.aws:micronaut-aws-lambda-events-serde")
+//    implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut.validation:micronaut-validation")
-//    implementation("io.micronaut.serde:micronaut-serde-jackson")
-//    implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut:micronaut-jackson-databind")
-
     runtimeOnly("ch.qos.logback:logback-classic")
 
-    implementation(project(":lib"))
+
+    //    ksp("io.micronaut.serde:micronaut-serde-processor")
+//    implementation("io.micronaut.serde:micronaut-serde")
+//    implementation("io.micronaut.serde:micronaut-serde-jackson")
+//    implementation("io.micronaut.serde:micronaut-serde-jackson")
+
+//    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
+//    annotationProcessor("io.micronaut:micronaut-http-validation")
+//    implementation("io.micronaut:micronaut-http-client-jdk")
+//    implementation("io.micronaut.aws:micronaut-aws-apigateway")
+//    implementation("io.micronaut.aws:micronaut-aws-lambda-events-serde")
+//    implementation("io.micronaut.validation:micronaut-validation")
+//    implementation("io.micronaut:micronaut-jackson-databind")
+//    implementation(project(":lib"))
+//
+//    runtimeOnly("ch.qos.logback:logback-classic")
 }
+
 
 application {
-    mainClass = "com.example.Application"
+    mainClass = "org.essexstreet.Application"
 }
-
 java {
     sourceCompatibility = JavaVersion.toVersion("17")
     targetCompatibility = JavaVersion.toVersion("17")
 }
 
 
+graalvmNative.toolchainDetection = false
 micronaut {
     runtime("lambda_provided")
     testRuntime("junit5")
@@ -61,7 +61,7 @@ micronaut {
     }
     processing {
         incremental(true)
-        annotations("com.example.*")
+        annotations("org.essexstreet.*")
     }
     aot {
         // Please review carefully the optimizations enabled below
@@ -77,25 +77,10 @@ micronaut {
     }
 }
 
-graalvmNative {
-    toolchainDetection.set(false)
-//    binaries {
-//        main {
-//
-//            imageName.set('mn-graalvm-application')
-//        }
-//    }
-//    binaries {
-//        main {
-//            imageName.set('mn-graalvm-application')
-////            buildArgs.add('--verbose')
-//        }
-//    }
-}
 
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
     baseImage = "amazonlinux:2023"
-    jdkVersion = "21"
+    jdkVersion = "17"
     args(
         "-XX:MaximumHeapSizePercent=80",
         "-Dio.netty.allocator.numDirectArenas=0",

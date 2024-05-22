@@ -28,8 +28,9 @@ public class TinyTypeTypeAwareFactoryDecorator implements JsonFactoryDecorator {
 
         public TinyTypeMaskedModule() {
             text(StringType.class, StringType::new);
-            text(SecretType.class, SecretType::new);
+            text(MaskedStringType.class, MaskedStringType::new);
             integer(IntegerType.class, IntegerType::new);
+            integer(MaskedIntegerType.class, MaskedIntegerType::new);
         }
 
         public <T extends TinyType<String>> TinyTypeMaskedModule text(Class<T> clazz, Function<String, T> fn) {
