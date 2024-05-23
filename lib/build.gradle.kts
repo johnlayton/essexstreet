@@ -1,3 +1,5 @@
+import fr.brouillard.oss.jgitver.Strategies
+
 //plugins {
 //    id("com.github.johnrengelman.shadow") version "8.1.1"
 //    id("io.micronaut.application") version "4.3.8"
@@ -16,10 +18,11 @@ plugins {
 //    id("org.graalvm.buildtools.native") version "0.9.12"
     id("java-library")
     id("maven-publish")
+    id("fr.brouillard.oss.gradle.jgitver")
 //    id("application")
 }
 
-version = "0.1"
+//version = "0.1"
 group = "org.essexstreet"
 
 repositories {
@@ -49,6 +52,10 @@ java {
     targetCompatibility = JavaVersion.toVersion("17")
 }
 
+
+jgitver {
+    strategy = Strategies.MAVEN
+}
 
 //micronaut {
 //    runtime("lambda_provided")
