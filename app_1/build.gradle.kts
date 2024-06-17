@@ -48,7 +48,7 @@ graalvmNative {
 
     }
     named("main") {
-      buildArgs.add("--verbose --initialize-at-build-time=ch.qos.logback,net.logstash.logback,org.slf4j.LoggerFactory")
+      buildArgs.add("--verbose --initialize-at-build-time=ch.qos.logback,net.logstash.logback,net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder,org.slf4j.LoggerFactory")
     }
   }
 }
