@@ -1,7 +1,12 @@
 plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.micronaut.application") version "4.3.8"
-    id("io.micronaut.aot") version "4.3.8"
+
+    id("io.micronaut.application") version "4.4.0"
+    id("io.micronaut.aot") version "4.4.0"
+
+//    alias(mn.
+
+//    alias(mn.)
 }
 
 version = "0.1"
@@ -12,7 +17,10 @@ repositories {
 }
 
 dependencies {
-    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
+//    annotationProcessor(mn.micr)
+//    compileOnly(mn.micronaut.spring.boot.annotation)
+    annotationProcessor(mn.micronaut.validation.processor)
+//    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
     annotationProcessor("io.micronaut:micronaut-http-validation")
     implementation("io.micronaut:micronaut-http-client-jdk")
     implementation("io.micronaut.aws:micronaut-aws-apigateway")

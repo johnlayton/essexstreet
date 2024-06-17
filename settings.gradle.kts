@@ -17,11 +17,16 @@ pluginManagement {
     }
 }
 
+plugins {
+    id("io.micronaut.platform.catalog")
+//    id("io.micronaut.platform.catalog") version "4.4.0"
+//    id("fr.brouillard.oss.gradle.jgitver") version "0.9.1"
+}
+
 //include("cli")
 include("lib")
 //include("lib_2")
 include("app_1")
 //include("app_2")
 //include("app_3")
-//include("app_2")
 include("infra")
