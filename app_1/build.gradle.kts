@@ -1,8 +1,8 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+  id("com.github.johnrengelman.shadow") version "8.1.1"
 
-    id("io.micronaut.application") version "4.4.0"
-    id("io.micronaut.aot") version "4.4.0"
+  id("io.micronaut.application") version "4.4.0"
+  id("io.micronaut.aot") version "4.4.0"
 
 //    alias(mn.
 
@@ -13,69 +13,79 @@ version = "0.1"
 group = "org.essexstreet"
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
 //    annotationProcessor(mn.micr)
 //    compileOnly(mn.micronaut.spring.boot.annotation)
-    annotationProcessor(mn.micronaut.validation.processor)
+  annotationProcessor(mn.micronaut.validation.processor)
 //    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
-    annotationProcessor("io.micronaut:micronaut-http-validation")
-    implementation("io.micronaut:micronaut-http-client-jdk")
-    implementation("io.micronaut.aws:micronaut-aws-apigateway")
-    implementation("io.micronaut.aws:micronaut-aws-lambda-events-serde")
-    implementation("io.micronaut.validation:micronaut-validation")
-    implementation("io.micronaut:micronaut-jackson-databind")
-    implementation(project(":lib"))
-    implementation("ch.qos.logback:logback-classic")
-    implementation("net.logstash.logback:logstash-logback-encoder:6.6")
+  annotationProcessor("io.micronaut:micronaut-http-validation")
+  implementation("io.micronaut:micronaut-http-client-jdk")
+  implementation("io.micronaut.aws:micronaut-aws-apigateway")
+  implementation("io.micronaut.aws:micronaut-aws-lambda-events-serde")
+  implementation("io.micronaut.validation:micronaut-validation")
+  implementation("io.micronaut:micronaut-jackson-databind")
+  implementation(project(":lib"))
+  implementation("ch.qos.logback:logback-classic")
+  implementation("net.logstash.logback:logstash-logback-encoder:6.6")
 }
 
 
 application {
-    mainClass = "org.essexstreet.Application"
+  mainClass = "org.essexstreet.Application"
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("17")
-    targetCompatibility = JavaVersion.toVersion("17")
+  sourceCompatibility = JavaVersion.toVersion("17")
+  targetCompatibility = JavaVersion.toVersion("17")
 }
 
 
+graalvmNative {
+  binaries {
+    all {
+
+    }
+    named("main") {
+      buildArgs.add("--verbose --initialize-at-build-time=ch.qos.logback,net.logstash.logback,org.slf4j.LoggerFactory")
+    }
+  }
+}
+
 graalvmNative.toolchainDetection = false
+
 micronaut {
-    runtime("lambda_provided")
-    testRuntime("junit5")
-    nativeLambda {
-        lambdaRuntimeClassName = "io.micronaut.function.aws.runtime.MicronautLambdaRuntime"
-    }
-    processing {
-        incremental(true)
-        annotations("org.essexstreet.*")
-    }
-    aot {
-        // Please review carefully the optimizations enabled below
-        // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
-        optimizeServiceLoading = false
-        convertYamlToJava = false
-        precomputeOperations = true
-        cacheEnvironment = true
-        optimizeClassLoading = true
-        deduceEnvironment = true
-        optimizeNetty = true
-        replaceLogbackXml = false
-    }
+  runtime("lambda_provided")
+  testRuntime("junit5")
+  nativeLambda {
+    lambdaRuntimeClassName = "io.micronaut.function.aws.runtime.MicronautLambdaRuntime"
+  }
+  processing {
+    incremental(true)
+    annotations("org.essexstreet.*")
+  }
+  aot {
+    // Please review carefully the optimizations enabled below
+    // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
+    optimizeServiceLoading = false
+    convertYamlToJava = false
+    precomputeOperations = true
+    cacheEnvironment = true
+    optimizeClassLoading = true
+    deduceEnvironment = true
+    optimizeNetty = true
+    replaceLogbackXml = false
+  }
 }
 
 
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
-    baseImage = "amazonlinux:2023"
-    jdkVersion = "17"
-    args(
-        "-XX:MaximumHeapSizePercent=80",
-        "-Dio.netty.allocator.numDirectArenas=0",
-        "-Dio.netty.noPreferDirect=true"
-    )
+  baseImage = "amazonlinux:2023"
+  jdkVersion = "17"
+  args(
+    "-XX:MaximumHeapSizePercent=80", "-Dio.netty.allocator.numDirectArenas=0", "-Dio.netty.noPreferDirect=true"
+  )
 }
 
 
