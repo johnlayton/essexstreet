@@ -93,7 +93,7 @@
     </appender>
 
     <root level="INFO">
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="CONSOLE"/>
     </root>
 
 </configuration>

@@ -48,7 +48,12 @@ graalvmNative {
 
     }
     named("main") {
-      buildArgs.add("--verbose --initialize-at-build-time=ch.qos.logback,net.logstash.logback,net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder,org.slf4j.LoggerFactory")
+      buildArgs.add("--verbose")
+//      buildArgs.add-H:+PrintClassInitialization
+      buildArgs("-H:ReflectionConfigurationFiles=/home/app/resources/META-INF/native-image/logback-config.json")
+      buildArgs.add("--enable-all-security-services")
+      buildArgs.add("--report-unsupported-elements-at-runtime")
+      buildArgs.add("--initialize-at-build-time=io.micronaut.jackson.modules.ParameterNamesModule,ch.qos.logback,net.logstash.logback,net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder,org.slf4j.LoggerFactory")
     }
   }
 }
