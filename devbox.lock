@@ -1,0 +1,19 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "jdk@latest": {
+      "last_modified": "2023-12-10T11:11:37Z",
+      "resolved": "github:NixOS/nixpkgs/29d6c96900b9b576c2fb89491452f283aa979819#jdk8",
+      "source": "devbox-search",
+      "version": "8u362-ga",
+      "systems": {
+        "aarch64-linux": {
+          "store_path": "/nix/store/jpl3k5djv2zhivjq44nqb6zxwic5mz9z-openjdk-8u362-ga"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/899bmfprcd61chk66g56sk227rn8zqr9-openjdk-8u362-ga"
+        }
+      }
+    }
+  }
+}
