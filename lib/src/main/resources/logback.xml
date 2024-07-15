@@ -1,0 +1,99 @@
+<configuration>
+
+<!--
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%cyan(%d{HH:mm:ss.SSS}) %gray([%thread]) %highlight(%-5level) %magenta(%logger{36}) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+<!--    <root level="info">-->
+<!--        <appender-ref ref="STDOUT" />-->
+<!--    </root>-->
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <!--
+                        <findAndRegisterJacksonModules>false</findAndRegisterJacksonModules>
+            -->
+
+            <!--
+                        <jsonGeneratorDecorator class="com.littlepay.logging.TinyTypeAwareJsonGeneratorDecorator">
+                        </jsonGeneratorDecorator>
+            -->
+            <jsonFactoryDecorator class="org.essexstreet.TinyTypeTypeAwareFactoryDecorator"/>
+
+            <!--
+                        <jsonGeneratorDecorator class="net.logstash.logback.mask.MaskingJsonGeneratorDecorator">
+                            <path>*/track2</path>
+                            <path>*/pan</path>
+                            <path>*/cvv</path>
+                            <path>*/expiry_date</path>
+                            <path>*/encrypted_pan</path>
+                            <path>*/encryption_key_id</path>
+                            <path>*/card_expiration</path>
+                            <path>*/icc_data</path>
+                            <path>*/card_mask</path>
+                        </jsonGeneratorDecorator>
+            -->
+            <providers>
+                <pattern>
+                    <pattern>
+                        {
+                        "timestamp": "%date{ISO8601}",
+                        "logger": "%logger",
+                        "level": "%level",
+                        "thread": "%thread",
+                        "message": "%message"
+                        }
+                    </pattern>
+                </pattern>
+                <!--
+                    The following provider adds details from exceptions with methods marked @ExceptionLogDetail("key")
+
+                    "exception_detail": {
+                      "key": ...
+                    },
+                -->
+                <!--
+                    <provider class="com.littlepay.secure.mpgs.logging.ExceptionDetailProvider"/>
+                -->
+                <!--
+                    The following provider adds details from open telemetry tracing context
+
+                    "trace_id": ...,
+                    "span_id": ...,
+                    "trace_flags": ...,
+                -->
+                <!--
+                    <provider class="com.littlepay.secure.mpgs.logging.OpenTelemetryProvider"/>
+                -->
+                <!--
+                    The following provider adds simple classname of the exception (useful for filtering alerts)
+                -->
+                <throwableClassName/>
+                <arguments/>
+                <mdc/>
+                <stackTrace>
+                    <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+                        <maxDepthPerThrowable>30</maxDepthPerThrowable>
+                        <maxLength>2048</maxLength>
+                        <shortenedClassNameLength>20</shortenedClassNameLength>
+                        <rootCauseFirst>true</rootCauseFirst>
+                    </throwableConverter>
+                </stackTrace>
+            </providers>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>
