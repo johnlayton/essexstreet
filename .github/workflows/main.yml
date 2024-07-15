@@ -2,9 +2,9 @@ name: Main
 
 on:
   push:
-    branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
