@@ -1,6 +1,5 @@
 package org.essexstreet;
 
-import com.example.AppStack;
 import software.amazon.awscdk.App;
 
 public class Main {
