@@ -136,7 +136,7 @@ jobs:
           java-version: 17
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3.4.2
+        uses: gradle/gradle-build-action@v3.5.0
 
       - name: Execute Gradle - BuildNativeLambda
         run: ./gradlew --console=plain :app:buildNativeLambda
@@ -146,7 +146,7 @@ jobs:
 
 #      - name: Publish to GitHub Packages
 #        if: ${{ !env.ACT }}
-#        uses: gradle/gradle-build-action@v3.4.2
+#        uses: gradle/gradle-build-action@v3.5.0
 #        with:
 #          arguments: --console=plain publish
 #        env:
