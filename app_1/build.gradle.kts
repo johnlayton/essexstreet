@@ -2,7 +2,7 @@ plugins {
   id("com.github.johnrengelman.shadow") version "8.1.1"
 
   id("io.micronaut.application") version "4.4.0"
-  id("io.micronaut.aot") version "4.4.0"
+  id("io.micronaut.aot") version "4.4.2"
 
 //    alias(mn.
 
