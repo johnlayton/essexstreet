@@ -16,7 +16,7 @@ plugins {
 //    id("io.micronaut.application") version "4.2.1"
 //    id("io.micronaut.aot") version "4.3.8"
 //    id("org.graalvm.buildtools.native") version "0.9.12"
-    id("io.micronaut.library") version "4.4.0"
+    id("io.micronaut.library") version "4.4.2"
     id("java-library")
     id("maven-publish")
     id("fr.brouillard.oss.gradle.jgitver")
