@@ -29,7 +29,7 @@ dependencies {
   implementation("io.micronaut:micronaut-jackson-databind")
   implementation(project(":lib"))
   implementation("ch.qos.logback:logback-classic")
-  implementation("net.logstash.logback:logstash-logback-encoder:7.4")
+  implementation("net.logstash.logback:logstash-logback-encoder:8.0")
 }
 
 
