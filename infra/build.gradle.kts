@@ -12,7 +12,7 @@ dependencies {
     implementation("io.micronaut.starter:micronaut-starter-aws-cdk:4.7.1") {
         exclude(group = "software.amazon.awscdk", module = "aws-cdk-lib")
     }
-    implementation("software.amazon.awscdk:aws-cdk-lib:2.172.0")
+    implementation("software.amazon.awscdk:aws-cdk-lib:2.173.1")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
 }
