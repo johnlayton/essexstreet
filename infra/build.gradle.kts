@@ -9,10 +9,11 @@ repositories {
 
 dependencies {
     implementation(platform("io.micronaut.platform:micronaut-platform:4.7.2"))
+    implementation(platform("io.micronaut.platform:micronaut-platform:4.7.6"))
     implementation("io.micronaut.starter:micronaut-starter-aws-cdk:4.7.6") {
         exclude(group = "software.amazon.awscdk", module = "aws-cdk-lib")
     }
-    implementation("software.amazon.awscdk:aws-cdk-lib:2.172.0")
+    implementation("software.amazon.awscdk:aws-cdk-lib:2.185.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
 }
