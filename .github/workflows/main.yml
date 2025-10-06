@@ -52,7 +52,7 @@ jobs:
 
       - name: Configure AWS credentials
         if: ${{ !env.ACT }}
-        uses: aws-actions/configure-aws-credentials@v4.1.0
+        uses: aws-actions/configure-aws-credentials@v5.0.0
         with:
           role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT }}:role/GitHubAction-AssumeRoleWithAction
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
@@ -60,7 +60,7 @@ jobs:
 
       - name: Configure AWS credentials
         if: ${{ env.ACT }}
-        uses: aws-actions/configure-aws-credentials@v4.1.0
+        uses: aws-actions/configure-aws-credentials@v5.0.0
         with:
           aws-region: ${{ env.AWS_REGION }}
 
@@ -112,7 +112,7 @@ jobs:
 
       - name: Configure AWS credentials
         if: ${{ !env.ACT }}
-        uses: aws-actions/configure-aws-credentials@v4.1.0
+        uses: aws-actions/configure-aws-credentials@v5.0.0
         with:
           role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT }}:role/GitHubAction-AssumeRoleWithAction
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
@@ -120,7 +120,7 @@ jobs:
 
       - name: Configure AWS credentials
         if: ${{ env.ACT }}
-        uses: aws-actions/configure-aws-credentials@v4.1.0
+        uses: aws-actions/configure-aws-credentials@v5.0.0
         with:
           aws-region: ${{ env.AWS_REGION }}
 
