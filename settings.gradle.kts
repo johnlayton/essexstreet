@@ -6,7 +6,7 @@ rootProject.name = "essexstreet"
 
 pluginManagement {
     plugins {
-        id("io.micronaut.platform.catalog") version "4.5.0"
+        id("io.micronaut.platform.catalog") version "4.5.5"
         id("fr.brouillard.oss.gradle.jgitver") version "0.9.1"
     }
 //    plugins {
